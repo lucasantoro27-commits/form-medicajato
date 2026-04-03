@@ -4,8 +4,12 @@ const cors = require("cors")
 const XLSX = require("xlsx")
 
 const app = express()
-
-app.use(cors())
+app.use(cors({
+  origin: [
+    "https://www.medicajatoapp.it",
+    "https://medicajatoapp.it"
+  ]
+}))
 app.use(express.json())
 
 /* ===============================
