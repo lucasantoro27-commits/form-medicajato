@@ -28,7 +28,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MAIL_PASS
   }
 })
-
+console.log("MAIL_USER:", process.env.MAIL_USER)
+console.log("MAIL_PASS:", process.env.MAIL_PASS ? "OK" : "MANCANTE")
 /* ===============================
 SALVA ISCRIZIONE + EMAIL
 ================================ */
