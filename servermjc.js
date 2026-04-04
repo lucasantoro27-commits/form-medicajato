@@ -15,6 +15,13 @@ app.use(cors({
 
 app.use(express.json())
 
+const path = require("path")
+
+/* 🔥 SERVE FILE COMUNI */
+app.get("/comuni.json", (req,res)=>{
+  res.sendFile(path.join(__dirname, "comuni.json"))
+})
+
 /* ===============================
 CONFIG EMAIL (BREVO)
 ================================ */
