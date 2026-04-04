@@ -60,18 +60,29 @@ app.post("/api/iscrizione", async (req,res)=>{
       to: "amministrazione@medicajato.it",
       subject: "Nuova iscrizione evento",
       html: `
-        <h3>Nuova iscrizione evento</h3>
+  <h3>Nuova iscrizione evento</h3>
 
-        <b>Nome:</b> ${dati.nome}<br/>
-        <b>Cognome:</b> ${dati.cognome}<br/>
-        <b>Codice Fiscale:</b> ${dati.codice_fiscale}<br/>
-        <b>Email:</b> ${dati.email || "-"}<br/>
-        <b>Telefono:</b> ${dati.telefono || "-"}<br/>
-        <b>Evento:</b> ${dati.evento}<br/>
+  <b>Nome:</b> ${dati.nome}<br/>
+  <b>Cognome:</b> ${dati.cognome}<br/>
+  
+  <b>Data nascita:</b> ${dati.data_nascita || "-"}<br/>
+  <b>Sesso:</b> ${dati.sesso || "-"}<br/>
+  
+  <b>Codice Fiscale:</b> ${dati.codice_fiscale}<br/>
+  
+  <b>Comune nascita:</b> ${dati.comune_nascita || "-"}<br/>
+  
+  <b>Indirizzo:</b> ${dati.indirizzo || "-"}<br/>
+  <b>Comune residenza:</b> ${dati.comune_residenza || "-"}<br/>
+  
+  <b>Email:</b> ${dati.email || "-"}<br/>
+  <b>Telefono:</b> ${dati.telefono || "-"}<br/>
+  
+  <b>Evento:</b> ${dati.evento}<br/>
 
-        <br/>
-        <small>Data invio: ${new Date().toLocaleString("it-IT")}</small>
-      `
+  <br/>
+  <small>Data invio: ${new Date().toLocaleString("it-IT")}</small>
+`
     })
 
     console.log("📧 Email inviata")
