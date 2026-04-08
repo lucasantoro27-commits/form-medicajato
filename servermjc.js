@@ -3,6 +3,7 @@ const fs = require("fs")
 const cors = require("cors")
 const XLSX = require("xlsx")
 const nodemailer = require("nodemailer")
+const path = require("path")
 
 const app = express()
 
@@ -15,9 +16,10 @@ app.use(cors({
 
 app.use(express.json())
 
-const path = require("path")
+/* ===============================
+SERVE FILE COMUNI
+================================ */
 
-/* 🔥 SERVE FILE COMUNI */
 app.get("/comuni.json", (req,res)=>{
   res.sendFile(path.join(__dirname, "comuni.json"))
 })
@@ -35,8 +37,41 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MAIL_PASS
   }
 })
+
 console.log("MAIL_USER:", process.env.MAIL_USER)
 console.log("MAIL_PASS:", process.env.MAIL_PASS ? "OK" : "MANCANTE")
+
+/* ===============================
+CONTROLLO DUPLICATI
+================================ */
+
+function iscrizioneEsistente(cf, evento) {
+
+  if (!fs.existsSync("iscrizioni.json")) return false
+
+  const righe = fs.readFileSync("iscrizioni.json", "utf8")
+    .trim()
+    .split("\n")
+
+  for (let r of righe) {
+    try {
+      const item = JSON.parse(r)
+
+      if (
+        item.codice_fiscale === cf &&
+        item.evento === evento
+      ) {
+        return true
+      }
+
+    } catch (e) {
+      console.error("Errore parsing riga")
+    }
+  }
+
+  return false
+}
+
 /* ===============================
 SALVA ISCRIZIONE + EMAIL
 ================================ */
@@ -44,6 +79,14 @@ SALVA ISCRIZIONE + EMAIL
 app.post("/api/iscrizione", async (req,res)=>{
 
   const dati = req.body
+
+  // 🔴 BLOCCO DUPLICATI
+  if (iscrizioneEsistente(dati.codice_fiscale, dati.evento)) {
+    return res.json({
+      success: false,
+      message: "Sei già iscritto a questo evento"
+    })
+  }
 
   const linea = JSON.stringify({
     ...dati,
@@ -60,37 +103,24 @@ app.post("/api/iscrizione", async (req,res)=>{
       to: "amministrazione@medicajato.it",
       subject: "Nuova iscrizione evento",
       html: `
-  <h3>Nuova iscrizione evento</h3>
+        <h3>Nuova iscrizione evento</h3>
 
-  <b>Nome:</b> ${dati.nome}<br/>
-  <b>Cognome:</b> ${dati.cognome}<br/>
-  
-  <b>Data nascita:</b> ${dati.data_nascita || "-"}<br/>
-  <b>Sesso:</b> ${dati.sesso || "-"}<br/>
-  
-  <b>Codice Fiscale:</b> ${dati.codice_fiscale}<br/>
-  
-  <b>Comune nascita:</b> ${dati.comune_nascita || "-"}<br/>
-  
-  <b>Indirizzo:</b> ${dati.indirizzo || "-"}<br/>
-  <b>Comune residenza:</b> ${dati.comune_residenza || "-"}<br/>
-  
-  <b>Email:</b> ${dati.email || "-"}<br/>
-  <b>Telefono:</b> ${dati.telefono || "-"}<br/>
-  
-  <b>Evento:</b> ${dati.evento}<br/>
+        <b>Nome:</b> ${dati.nome}<br/>
+        <b>Cognome:</b> ${dati.cognome}<br/>
+        <b>Codice Fiscale:</b> ${dati.codice_fiscale}<br/>
+        <b>Email:</b> ${dati.email || "-"}<br/>
+        <b>Telefono:</b> ${dati.telefono || "-"}<br/>
+        <b>Evento:</b> ${dati.evento}<br/>
 
-  <br/>
-  <small>Data invio: ${new Date().toLocaleString("it-IT")}</small>
-`
+        <br/>
+        <small>Data invio: ${new Date().toLocaleString("it-IT")}</small>
+      `
     })
 
     console.log("📧 Email inviata")
 
   } catch (err) {
-
     console.error("❌ Errore invio email:", err.message)
-
   }
 
   res.json({ success:true })
