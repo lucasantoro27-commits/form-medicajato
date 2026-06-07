@@ -10,7 +10,8 @@ app.use(cors({
   origin: [
     "https://www.medicajatoapp.it",
     "https://medicajatoapp.it",
-    "https://localhost:5173"
+    "https://localhost:5173",
+    "http://localhost:5173"
   ]
 }))
 
