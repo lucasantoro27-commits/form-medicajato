@@ -9,7 +9,8 @@ const app = express()
 app.use(cors({
   origin: [
     "https://www.medicajatoapp.it",
-    "https://medicajatoapp.it"
+    "https://medicajatoapp.it",
+    "https://localhost:5173"
   ]
 }))
 
