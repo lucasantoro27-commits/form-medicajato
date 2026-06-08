@@ -180,25 +180,27 @@ app.get("/api/iscrizioni",(req,res)=>{
 
 app.get("/api/iscrizioni/:dest",(req,res)=>{
 
-  const dest = req.params.dest
+  const dest = req.params.dest;
 
   if(!fs.existsSync("iscrizioni.json")){
-    return res.json([])
+    return res.json([]);
   }
 
- const rows = fs
-  .readFileSync("iscrizioni.json","utf8")
-  .trim()
-  .split("\n")
-  .filter(Boolean)
-  .map(r => JSON.parse(r))
-  .filter(
-    r =>
-      r.destinazione === dest &&
-      r.stato_importazione !== "importata"
-  );
+  const rows = fs
+    .readFileSync("iscrizioni.json","utf8")
+    .trim()
+    .split("\n")
+    .filter(Boolean)
+    .map(r => JSON.parse(r))
+    .filter(
+      r =>
+        r.destinazione === dest &&
+        r.stato_importazione !== "importata"
+    );
 
-})
+  res.json(rows);
+
+});
 
 app.post(
   "/api/iscrizioni/:id/importata",
