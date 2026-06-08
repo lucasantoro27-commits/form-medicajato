@@ -16,6 +16,31 @@ app.use(cors({
   ]
 }))
 
+app.get("/api/iscrizioni-studio",(req,res)=>{
+
+  if(!fs.existsSync("iscrizioni.json")){
+    return res.json([]);
+  }
+
+  const rows = fs
+    .readFileSync("iscrizioni.json","utf8")
+    .split("\n")
+    .filter(Boolean)
+    .map(r => JSON.parse(r));
+
+  const studio = rows.filter(
+    r =>
+      String(r.destinazione || "")
+        .trim()
+        .toLowerCase() === "studio"
+      &&
+      r.stato_importazione !== "importata"
+  );
+
+  res.json(studio);
+
+});
+
 app.use(express.json())
 
 const path = require("path")
