@@ -185,15 +185,17 @@ app.get("/api/iscrizioni/:dest",(req,res)=>{
     return res.json([])
   }
 
-  const rows = fs
-    .readFileSync("iscrizioni.json","utf8")
-    .trim()
-    .split("\n")
-    .filter(Boolean)
-    .map(r => JSON.parse(r))
-    .filter(r => r.destinazione === dest)
-
-  res.json(rows)
+ const rows = fs
+  .readFileSync("iscrizioni.json","utf8")
+  .trim()
+  .split("\n")
+  .filter(Boolean)
+  .map(r => JSON.parse(r))
+  .filter(
+    r =>
+      r.destinazione === dest &&
+      r.stato_importazione !== "importata"
+  );
 
 })
 
