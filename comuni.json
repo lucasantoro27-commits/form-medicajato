@@ -1,4 +1,126 @@
 [
+  [
+  {
+    "nome": "FRANCIA",
+    "provincia": "EE",
+    "codice": "Z110",
+    "attivo": true
+  },
+  {
+    "nome": "GERMANIA",
+    "provincia": "EE",
+    "codice": "Z112",
+    "attivo": true
+  },
+  {
+    "nome": "SVIZZERA",
+    "provincia": "EE",
+    "codice": "Z133",
+    "attivo": true
+  },
+  {
+    "nome": "BELGIO",
+    "provincia": "EE",
+    "codice": "Z103",
+    "attivo": true
+  },
+  {
+    "nome": "SPAGNA",
+    "provincia": "EE",
+    "codice": "Z131",
+    "attivo": true
+  },
+  {
+    "nome": "PORTOGALLO",
+    "provincia": "EE",
+    "codice": "Z128",
+    "attivo": true
+  },
+  {
+    "nome": "REGNO UNITO",
+    "provincia": "EE",
+    "codice": "Z114",
+    "attivo": true
+  },
+  {
+    "nome": "STATI UNITI",
+    "provincia": "EE",
+    "codice": "Z404",
+    "attivo": true
+  },
+  {
+    "nome": "CANADA",
+    "provincia": "EE",
+    "codice": "Z401",
+    "attivo": true
+  },
+  {
+    "nome": "ARGENTINA",
+    "provincia": "EE",
+    "codice": "Z100",
+    "attivo": true
+  },
+  {
+    "nome": "BRASILE",
+    "provincia": "EE",
+    "codice": "Z602",
+    "attivo": true
+  },
+  {
+    "nome": "TUNISIA",
+    "provincia": "EE",
+    "codice": "Z352",
+    "attivo": true
+  },
+  {
+    "nome": "MAROCCO",
+    "provincia": "EE",
+    "codice": "Z330",
+    "attivo": true
+  },
+  {
+    "nome": "ROMANIA",
+    "provincia": "EE",
+    "codice": "Z129",
+    "attivo": true
+  },
+  {
+    "nome": "ALBANIA",
+    "provincia": "EE",
+    "codice": "Z100",
+    "attivo": true
+  },
+  {
+    "nome": "POLONIA",
+    "provincia": "EE",
+    "codice": "Z127",
+    "attivo": true
+  },
+  {
+    "nome": "UCRAINA",
+    "provincia": "EE",
+    "codice": "Z138",
+    "attivo": true
+  },
+  {
+    "nome": "MOLDAVIA",
+    "provincia": "EE",
+    "codice": "Z140",
+    "attivo": true
+  },
+  {
+    "nome": "CINA",
+    "provincia": "EE",
+    "codice": "Z210",
+    "attivo": true
+  },
+  {
+    "nome": "INDIA",
+    "provincia": "EE",
+    "codice": "Z222",
+    "attivo": true
+  }
+]
   {
     "nome": "ABANO",
     "provincia": "PD",
