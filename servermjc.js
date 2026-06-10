@@ -348,6 +348,38 @@ app.get(
 
     });
 
+    app.delete("/api/iscrizioni/:id",(req,res)=>{
+
+  if(!fs.existsSync("iscrizioni.json")){
+    return res.json({
+      success:false
+    });
+  }
+
+  const rows = fs
+    .readFileSync("iscrizioni.json","utf8")
+    .split("\n")
+    .filter(Boolean)
+    .map(r => JSON.parse(r));
+
+  const filtered = rows.filter(
+    r => r.id !== req.params.id
+  );
+
+  fs.writeFileSync(
+    "iscrizioni.json",
+    filtered
+      .map(r => JSON.stringify(r))
+      .join("\n")
+    + (filtered.length ? "\n" : "")
+  );
+
+  res.json({
+    success:true
+  });
+
+});
+
 });
 /* ===============================
 SERVER
