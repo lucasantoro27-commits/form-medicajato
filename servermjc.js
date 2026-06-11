@@ -88,8 +88,9 @@ dati.data_invio =
   "bls",
   "ecg",
   "info",
-  "evento",
-  "accessi_vascolari"
+  "elettrofisiologia",
+  "accessi_vascolari",
+  "evento"
 ]
 
 dati.destinazione =
