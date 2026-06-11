@@ -240,10 +240,7 @@ app.post(
     }
 
     const rows = fs
-      .readFileSync(
-        "iscrizioni.json",
-        "utf8"
-      )
+      .readFileSync("iscrizioni.json","utf8")
       .split("\n")
       .filter(Boolean)
       .map(r => JSON.parse(r));
@@ -277,7 +274,6 @@ app.post(
     res.json({
       success:trovato
     });
-
 });
 
 app.get(
@@ -348,7 +344,7 @@ app.get(
         ).length
 
     });
-  }
+  
 });
 /* ===============================
 SERVER
