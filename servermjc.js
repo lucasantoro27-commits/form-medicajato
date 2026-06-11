@@ -90,7 +90,7 @@ dati.data_invio =
   "info",
   "elettrofisiologia",
   "accessi_vascolari",
-  "evento"
+  "eventi"
 ]
 
 dati.destinazione =
